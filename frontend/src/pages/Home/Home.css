@@ -1,0 +1,120 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.home {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  width: 100%; /* Full width (avoids scrollbar issue from 100vw) */
+}
+
+.home-content {
+  flex: 1; /* Take remaining space after sidebar */
+  padding: 20px;
+  overflow-y: auto; /* Allow scroll ONLY inside content if data overflows */
+}
+
+.container {
+  flex: 1; /* Take remaining space after sidebar */
+  display: flex;
+  flex-direction: column; /* Navbar at top, content below */
+}
+
+.top-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.btn-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-box i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.search-box input {
+  padding: 8px 8px 8px 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Table */
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.employee-table th,
+.employee-table td {
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.employee-table th {
+  background: #f9f9f9;
+  font-weight: 600;
+}
+
+.no-records {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}
+
+/* Action icons */
+.action-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-icons i {
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.action-icons .view {
+  color: #007bff;
+}
+
+.action-icons .edit {
+  color: #28a745;
+}
+
+.action-icons .delete {
+  color: #dc3545;
+}
