@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { CiSearch } from "react-icons/ci";
+import { IoMdAddCircleOutline } from "react-icons/io";
 import { FaEye, FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import "./Employee.css";
 
@@ -33,7 +34,10 @@ function Employee() {
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <button className="btn btn-primary">Add Employee</button>
+          <button className="btn btn-primary">
+            <IoMdAddCircleOutline />
+            Add New Employee
+          </button>
         </div>
       </div>
 

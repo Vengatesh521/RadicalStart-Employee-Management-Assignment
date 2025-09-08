@@ -30,12 +30,22 @@
 }
 
 .btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px; /* space between icon and text */
   background-color: #007bff;
   color: #fff;
   border: none;
-  padding: 8px 12px;
+  padding: 8px 14px;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-primary svg {
+  font-size: 18px; /* control icon size */
+  vertical-align: middle;
 }
 
 .btn-primary:hover {
