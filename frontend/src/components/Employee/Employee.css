@@ -60,6 +60,7 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
+  border: 1px solid #ccc;
 }
 
 .employee-table th,
@@ -68,16 +69,19 @@
   border-bottom: 1px solid #eee;
   text-align: left;
 }
-
+.employee-table th {
+  color: #636363;
+}
 .employee-table th {
   background: #f9f9f9;
   font-weight: 600;
 }
 
 .no-records {
-  text-align: center;
+  text-align: center !important;
   padding: 20px;
-  color: #888;
+  font-weight: 500;
+  color: #191919 !important;
 }
 
 .emp-name {
