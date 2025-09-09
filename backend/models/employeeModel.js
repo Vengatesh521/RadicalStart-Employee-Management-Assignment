@@ -10,12 +10,13 @@ export const addEmployee = (data, callback) => {
   db.query(sql, data, callback);
 };
 
-export const updateEmployee = (id, data, callback) => {
+// ✅ Use employee_id instead of id
+export const updateEmployee = (employeeId, data, callback) => {
   const sql =
-    "UPDATE employees SET name=?, department=?, designation=?, project=?, type=?, status=?, profile_img=? WHERE id=?";
-  db.query(sql, [...data, id], callback);
+    "UPDATE employees SET name=?, department=?, designation=?, project=?, type=?, status=?, profile_img=? WHERE employee_id=?";
+  db.query(sql, [...data, employeeId], callback);
 };
 
-export const deleteEmployee = (id, callback) => {
-  db.query("DELETE FROM employees WHERE id=?", [id], callback);
+export const deleteEmployee = (employeeId, callback) => {
+  db.query("DELETE FROM employees WHERE employee_id=?", [employeeId], callback);
 };

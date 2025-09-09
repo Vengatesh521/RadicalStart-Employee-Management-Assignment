@@ -1,18 +1,205 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoPerson } from "react-icons/io5";
+import { HiOutlineCamera } from "react-icons/hi2";
+import { FiEdit } from "react-icons/fi";
+import axios from "axios";
 import "./EditEmployee.css";
 
-function EditEmployee() {
-  const { id } = useParams();
+function EditEmployee({ employee, onBack }) {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [formData, setFormData] = useState({
+    name: employee.name,
+    employeeId: employee.employee_id,
+    department: employee.department,
+    designation: employee.designation,
+    project: employee.project,
+    type: employee.type,
+    status: employee.status,
+  });
+  const [message, setMessage] = useState("");
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("employee_id", formData.employeeId);
+    data.append("department", formData.department);
+    data.append("designation", formData.designation);
+    data.append("project", formData.project);
+    data.append("type", formData.type);
+    data.append("status", formData.status);
+    if (document.getElementById("upload").files[0]) {
+      data.append("profile_img", document.getElementById("upload").files[0]);
+    }
+
+    try {
+      await axios.put(
+        `http://localhost:5000/api/employees/${employee.employee_id}`,
+        data,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      setMessage("Employee updated successfully!");
+    } catch (error) {
+      setMessage("Error updating employee: " + error.message);
+    }
+  };
 
   return (
-    <div className="edit-employee">
-      <h2>Edit Employee #{id}</h2>
-      <form>
-        <input type="text" placeholder="Name" />
-        <input type="text" placeholder="Department" />
-        <input type="text" placeholder="Designation" />
-        <button type="submit">Save</button>
+    <div className="add-employee-container">
+      <div className="header" onClick={onBack}>
+        <IoIosArrowBack className="back-icon" />
+        <h2>Edit Employee Details</h2>
+      </div>
+      <form onSubmit={handleSubmit}>
+        <div className="personal-info">
+          <IoPerson className="icon-person" />
+          <h3>Personal Information</h3>
+        </div>
+        <div className="profile-upload">
+          <div className="profile-square">
+            {selectedImage || employee.profile_img ? (
+              <div className="image-container">
+                <img
+                  src={
+                    selectedImage ||
+                    `http://localhost:5000/uploads/${employee.profile_img}`
+                  }
+                  alt="Profile"
+                  className="uploaded-image"
+                />
+                <label htmlFor="upload" className="edit-overlay">
+                  <FiEdit className="edit-icon" />
+                </label>
+              </div>
+            ) : (
+              <label htmlFor="upload" className="camera-overlay">
+                <HiOutlineCamera className="camera-icon" />
+              </label>
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              className="upload"
+              id="upload"
+              onChange={handleImageUpload}
+            />
+          </div>
+        </div>
+        {/* Reuse same form grid like AddEmployee */}
+        <div className="form-grid">
+          <div className="form-field">
+            <label>Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-field">
+            <label>Employee ID*</label>
+            <input
+              type="text"
+              name="employeeId"
+              value={formData.employeeId}
+              onChange={handleChange}
+              required
+              disabled // usually Employee ID should not be editable
+            />
+          </div>
+          <div className="form-field">
+            <label>Department*</label>
+            <select
+              name="department"
+              value={formData.department}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Department</option>
+              <option value="design">Design</option>
+              <option value="development">Development</option>
+              <option value="marketing">Marketing</option>
+              <option value="hr">Human Resources</option>
+            </select>
+          </div>
+          <div className="form-field">
+            <label>Designation*</label>
+            <input
+              type="text"
+              name="designation"
+              value={formData.designation}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-field">
+            <label>Project</label>
+            <input
+              type="text"
+              name="project"
+              value={formData.project}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-field">
+            <label>Type*</label>
+            <select
+              name="type"
+              value={formData.type}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Type</option>
+              <option value="office">Office</option>
+              <option value="remote">Remote</option>
+              <option value="hybrid">Hybrid</option>
+            </select>
+          </div>
+          <div className="form-field">
+            <label>Status*</label>
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Status</option>
+              <option value="permanent">Permanent</option>
+              <option value="contract">Contract</option>
+              <option value="intern">Intern</option>
+              <option value="temporary">Temporary</option>
+            </select>
+          </div>
+        </div>
+        {message && <p className="message">{message}</p>}
+        <div className="buttons">
+          <button type="button" className="cancel-btn" onClick={onBack}>
+            Cancel
+          </button>
+          <button type="submit" className="confirm-btn">
+            Update
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -30,19 +30,65 @@ h3 {
 
 .profile-upload {
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
   margin-bottom: 20px;
 }
 
-.profile-circle {
+.profile-square {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
   border: 2px dashed #ddd;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #f9f9f9;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.uploaded-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  color: #888;
+}
+
+.edit-overlay {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  cursor: pointer;
+  color: #000;
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.camera-icon {
+  font-size: 24px;
+}
+
+.edit-icon {
+  font-size: 20px;
+}
+
+.upload {
+  display: none;
 }
 
 .form-grid {
@@ -64,18 +110,17 @@ h3 {
 
 .form-field input,
 .form-field select {
-  padding: 5px;
+  padding: 8px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 14px;
 }
 
 .status-field {
-  grid-column: span 1; /* Only take one column */
+  grid-column: span 1;
 }
 
 .profile-img-field {
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
 }
@@ -112,11 +157,21 @@ h3 {
 
 .personal-info {
   color: #007bff;
-  display: inline-flex; /* Limits width to content */
-  gap: 10px; /* Space between icon and text */
+  display: inline-flex;
+  gap: 10px;
   justify-content: center;
   align-items: center;
-  border-bottom: 2px solid #007bff; /* Adjusted to 2px as requested */
+  border-bottom: 2px solid #007bff;
   padding: 0px;
-  margin: 10px;
+  margin-bottom: 15px;
+}
+
+.icon-person {
+  font-size: 24px;
+}
+
+.message {
+  color: #28a745; /* Green for success */
+  margin-top: 10px;
+  font-weight: 500;
 }

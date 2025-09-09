@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Employee from "../../components/Employee/Employee"; // import Employee component
 import "./Home.css";
@@ -12,7 +11,6 @@ function Home() {
       <Sidebar setActiveTab={setActiveTab} activeTab={activeTab} />
 
       <div className="container">
-        <Navbar />
         <div className="home-content">
           {activeTab === "dashboard" && (
             <h2>Dashboard – Will be implemented soon</h2>

@@ -36,9 +36,9 @@ export const createEmployee = (req, res) => {
 };
 
 export const editEmployee = (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params; // <-- this is actually employee_id
   const { name, department, designation, project, type, status } = req.body;
-  const profile_img = req.file ? req.file.filename : req.body.profile_img; // keep old if not updated
+  const profile_img = req.file ? req.file.filename : req.body.profile_img;
 
   updateEmployee(
     id,
@@ -51,7 +51,7 @@ export const editEmployee = (req, res) => {
 };
 
 export const removeEmployee = (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params; // <-- employee_id
   deleteEmployee(id, (err, result) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ message: "Employee deleted" });

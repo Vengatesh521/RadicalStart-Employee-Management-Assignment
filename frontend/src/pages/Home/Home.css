@@ -8,20 +8,23 @@ body {
 
 .home {
   display: flex;
-  height: 100vh; /* Full viewport height */
-  width: 100%; /* Full width (avoids scrollbar issue from 100vw) */
+  height: 100vh;
+  width: 100%;
 }
 
 .home-content {
-  flex: 1; /* Take remaining space after sidebar */
+  flex: 1;
   padding: 20px;
-  overflow-y: auto; /* Allow scroll ONLY inside content if data overflows */
+  overflow-y: auto;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
-  flex: 1; /* Take remaining space after sidebar */
+  flex: 1;
   display: flex;
-  flex-direction: column; /* Navbar at top, content below */
+  flex-direction: column;
 }
 
 .top-container {
